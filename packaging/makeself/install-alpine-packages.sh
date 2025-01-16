@@ -1,11 +1,11 @@
 #!/usr/bin/env sh
+# Copyright: SPDX-License-Identifier: GPL-3.0-or-later
 #
 # Installation script for the alpine host
 # to prepare the static binary
-#
-# Copyright: SPDX-License-Identifier: GPL-3.0-or-later
-#
-# Author: Paul Emm. Katsoulakis <paul@netdata.cloud>
+
+apk update || exit 1
+apk upgrade || exit 1
 
 # Add required APK packages
 apk add --no-cache -U \
@@ -21,6 +21,7 @@ apk add --no-cache -U \
   git \
   gnutls-dev \
   gzip \
+  jq \
   libelf-static \
   libmnl-dev \
   libnetfilter_acct-dev \

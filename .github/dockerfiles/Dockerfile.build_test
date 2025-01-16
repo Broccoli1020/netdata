@@ -1,4 +1,7 @@
-ARG BASE
+# The default value is overridden in every Dockerfile usage, but adding it here helps avoid issues with
+# CI checks that require a non-empty or valid base image name. See more details here:
+# https://docs.docker.com/go/dockerfile/rule/invalid-default-arg-in-from/
+ARG BASE="netdata"
 
 FROM ${BASE}
 
@@ -6,7 +9,7 @@ ARG PRE
 ENV PRE=${PRE}
 ARG RMJSONC
 ENV RMJSONC=${RMJSONC}
-ENV DO_NOT_TRACK=1
+ENV DISABLE_TELEMETRY=1
 ENV GITHUB_ACTIONS=true
 
 RUN echo "${PRE}" > /prep-cmd.sh && \
@@ -15,4 +18,4 @@ RUN echo "${PRE}" > /prep-cmd.sh && \
 
 COPY . /netdata
 
-RUN /netdata/packaging/installer/install-required-packages.sh --dont-wait --non-interactive netdata-all
+RUN /netdata/packaging/installer/install-required-packages.sh --dont-wait --non-interactive netdata

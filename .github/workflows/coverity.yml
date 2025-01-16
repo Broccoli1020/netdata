@@ -7,9 +7,9 @@ on:
   pull_request:
     paths:
       - .github/workflows/coverity.yml
-      - coverity-scan.sh
+      - packaging/utils/coverity-scan.sh
 env:
-  DO_NOT_TRACK: 1
+  DISABLE_TELEMETRY: 1
 concurrency:
   group: coverity-${{ github.ref }}
   cancel-in-progress: true
@@ -19,26 +19,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+        id: checkout
         with:
           submodules: recursive
       - name: Prepare environment
+        id: prepare
         env:
           DEBIAN_FRONTEND: 'noninteractive'
         run: |
           ./packaging/installer/install-required-packages.sh \
             --dont-wait --non-interactive netdata
-          sudo apt-get install -y libjson-c-dev libipmimonitoring-dev \
+          sudo apt-get install -y libjson-c-dev libyaml-dev libipmimonitoring-dev \
                                   libcups2-dev libsnappy-dev libprotobuf-dev \
                                   libprotoc-dev libssl-dev protobuf-compiler \
-                                  libnetfilter-acct-dev
+                                  libnetfilter-acct-dev libmongoc-dev libxen-dev \
+                                  libsystemd-dev ninja-build
       - name: Run coverity-scan
+        id: run
         env:
           REPOSITORY: 'netdata/netdata'
           COVERITY_SCAN_TOKEN: ${{ secrets.COVERITY_SCAN_TOKEN }}
           COVERITY_SCAN_SUBMIT_MAIL: ${{ secrets.COVERITY_SCAN_SUBMIT_MAIL }}
         run: |
-          ./coverity-scan.sh --with-install
+          bash -x ./packaging/utils/coverity-scan.sh --with-install
       - name: Failure Notification
         uses: rtCamp/action-slack-notify@v2
         env:
@@ -47,6 +51,11 @@ jobs:
           SLACK_ICON_EMOJI: ':github-actions:'
           SLACK_TITLE: 'Coverity run failed:'
           SLACK_USERNAME: 'GitHub Actions'
+          SLACK_MESSAGE: |-
+              ${{ github.repository }}: Coverity failed to run correctly.
+              Checkout: ${{ steps.checkout.outcome }}
+              Environment preparation: ${{ steps.prepare.outcome }}
+              Coverity run: ${{ steps.run.outcome }}
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
         if: ${{
             failure()

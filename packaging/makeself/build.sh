@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/bash
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 # -----------------------------------------------------------------------------
@@ -27,19 +27,11 @@ done
 # the required packages. build-x86_64-static.sh will do this for you
 # using docker.
 
-cd "$(dirname "$0")" || exit 1
+mkdir -p /usr/src
+cp -va /netdata /usr/src/netdata
+chown -R root:root /usr/src/netdata
 
-# if we don't run inside the netdata repo
-# download it and run from it
-if [ ! -f ../../netdata-installer.sh ]; then
-  git clone https://github.com/netdata/netdata.git netdata.git || exit 1
-  cd netdata.git/makeself || exit 1
-  ./build.sh "$@"
-  exit $?
-fi
-
-git clean -dxf
-git submodule foreach --recursive git clean -dxf
+cd /usr/src/netdata/packaging/makeself || exit 1
 
 cat >&2 << EOF
 This program will create a self-extracting shell package containing
@@ -64,3 +56,7 @@ if ! ./run-all-jobs.sh "$@"; then
   printf >&2 "Build failed."
   exit 1
 fi
+
+mkdir -p /netdata/artifacts
+cp -va /usr/src/netdata/artifacts/* /netdata/artifacts/
+chown -R "$(stat -c '%u:%g' /netdata)" /netdata/artifacts/

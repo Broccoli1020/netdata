@@ -5,63 +5,48 @@
 * @Ferroin
 
 # Ownership by directory structure
-.travis/ @Ferroin @iigorkarpov @maneamarius @kaskavel @vkalintiris
-.github/ @Ferroin @iigorkarpov @maneamarius @kaskavel @vkalintiris
-aclk/ @stelfrag @underhood
-backends/ @thiagoftsm @vlvkobal
-backends/graphite/ @thiagoftsm @vlvkobal
-backends/json/ @thiagoftsm @vlvkobal
-backends/opentsdb/ @thiagoftsm @vlvkobal
-backends/prometheus/ @vlvkobal @thiagoftsm
-build/ @Ferroin @iigorkarpov @maneamarius
-contrib/debian @Ferroin @iigorkarpov @maneamarius @vkalintiris
-collectors/ @vlvkobal
-collectors/charts.d.plugin/ @ilyam8 @Ferroin
-collectors/freebsd.plugin/ @vlvkobal @thiagoftsm
-collectors/ebpf.plugin/ @thiagoftsm @vlvkobal
-collectors/macos.plugin/ @vlvkobal @thiagoftsm
-collectors/node.d.plugin/ @jacekkolasa
-collectors/node.d.plugin/fronius/ @ccremer
-collectors/node.d.plugin/snmp/ @jacekkolasa
-collectors/node.d.plugin/stiebeleltron/ @ccremer
-collectors/python.d.plugin/ @ilyam8
-collectors/cups.plugin/ @simonnagl @vlvkobal @thiagoftsm
-exporting/  @vlvkobal @thiagoftsm
-daemon/ @thiagoftsm
-database/ @thiagoftsm @vkalintiris
-docs/ @DShreve2 @kickoke
-health/ @thiagoftsm @vlvkobal @vkalintiris
-health/health.d/ @thiagoftsm @vlvkobal
-health/notifications/ @Ferroin @thiagoftsm
-ml/ @siamaktavakoli @vkalintiris
-libnetdata/ @thiagofsm
-packaging/ @Ferroin @iigorkarpov @maneamarius @vkalintiris
-registry/ @jacekkolasa
-streaming/ @thiagoftsm @vlvkobal
-system/ @Ferroin @iigorkarpov @maneamarius @vkalintiris
-tests/ @Ferroin @iigorkarpov @maneamarius @kaskavel @vkalintiris
-web/ @thiagoftsm @vlvkobal @vkalintiris
-web/gui/ @jacekkolasa
+.github/ @netdata/agent-sre
+src/aclk/ @stelfrag
+src/collectors/ @thiagoftsm
+src/collectors/ebpf.plugin/ @thiagoftsm
+src/collectors/charts.d.plugin/ @ilyam8 @Ferroin
+src/collectors/freebsd.plugin/ @thiagoftsm
+src/collectors/macos.plugin/ @thiagoftsm
+src/collectors/python.d.plugin/ @ilyam8
+src/collectors/cups.plugin/ @thiagoftsm
+src/exporting/ @thiagoftsm
+src/daemon/ @thiagoftsm @vkalintiris
+src/database/ @thiagoftsm @vkalintiris
+docs/ @Ancairon
+src/go/ @ilyam8
+src/health/ @thiagoftsm @vkalintiris
+src/health/health.d/ @thiagoftsm
+src/health/notifications/ @Ferroin @thiagoftsm
+src/ml/ @vkalintiris
+src/libnetdata/ @thiagoftsm @vkalintiris
+packaging/ @netdata/agent-sre
+packaging/cmake @Ferroin @vkalintiris
+src/registry/ @novykh
+src/streaming/ @thiagoftsm
+system/ @netdata/agent-sre
+tests/ @netdata/agent-sre @vkalintiris
+src/web/ @thiagoftsm @vkalintiris
+src/web/gui/ @novykh
 
 # Ownership by filetype (overwrites ownership by directory)
-*.am @Ferroin @iigorkarpov @maneamarius @vkalintiris
-*.md @DShreve2 @kickoke
-Dockerfile* @Ferroin @iigorkarpov @maneamarius @vkalintiris
+*.md @Ancairon
+*.mdx @Ancairon
+Dockerfile* @netdata/agent-sre
 
 # Ownership of specific files
-.gitignore @Ferroin @iigorkarpov @maneamarius @vkalintiris
-.travis.yml @Ferroin @iigorkarpov @maneamarius @kaskavel @vkalintiris
-.lgtm.yml @Ferroin @iigorkarpov @maneamarius @vkalintiris
-.eslintrc @Ferroin @iigorkarpov @maneamarius @vkalintiris
-.eslintignore @Ferroin @iigorkarpov @maneamarius @vkalintiris
-.csslintrc @Ferroin @iigorkarpov @maneamarius @vkalintiris
-.codeclimate.yml @Ferroin @iigorkarpov @maneamarius @vkalintiris
-.codacy.yml @Ferroin @iigorkarpov @maneamarius @vkalintiris
-.yamllint.yml @Ferroin @iigorkarpov @maneamarius @vkalintiris
-netdata.spec.in @Ferroin @iigorkarpov @maneamarius @vkalintiris
-netdata-installer.sh @Ferroin @iigorkarpov @maneamarius @vkalintiris
-package.json @jacekkolasa @Ferroin @iigorkarpov @maneamarius @vkalintiris
-packaging/version @netdatabot @Ferroin @iigorkarpov @maneamarius @vkalintiris
+.gitignore @netdata/agent-sre @vkalintiris
+.codacy.yml @netdata/agent-sre
+.yamllint.yml @netdata/agent-sre
+CMakeLists.txt @netdata/agent-sre @vkalintiris
+netdata.spec.in @netdata/agent-sre
+netdata-installer.sh @netdata/agent-sre
+packaging/version @netdatabot @netdata/agent-sre
+packaging/repoconfig/CMakelists.txt @netdata/agent-sre
 
-LICENSE.md @DShreve2 @Ferroin @vkalintiris
-CHANGELOG.md @netdatabot @Ferroin @iigorkarpov @maneamarius @vkalintiris
+LICENSE.md @netdata/agent-sre @vkalintiris
+CHANGELOG.md @netdatabot @netdata/agent-sre
